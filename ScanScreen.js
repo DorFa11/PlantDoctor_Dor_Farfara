@@ -8,7 +8,8 @@ import GradientBackground from './GradientBackground';
 import { useNavigation } from '@react-navigation/native'; 
 import ImageResizer from 'react-native-image-resizer';
 import { useEffect } from 'react';
-
+import { ServerUrlContext } from './ServerUrlContext';
+import { useContext } from 'react';
 
 
 const ScanScreen = () => {
@@ -17,6 +18,8 @@ const ScanScreen = () => {
   const [imageUri, setImageUri] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [dotCount, setDotCount] = useState(0);
+  const { serverUrl } = useContext(ServerUrlContext);
+
 
   useEffect(() => {
     let interval = null;
@@ -91,8 +94,13 @@ const ScanScreen = () => {
       224,
       224,
       'JPEG',
-      100
-    );
+      100,
+      0,
+      undefined,
+      false,
+      { mode: 'cover' }  // Ensures it fills the size and crops overflow
+    )
+
 
     const formData = new FormData();
     formData.append('file', {
@@ -101,7 +109,7 @@ const ScanScreen = () => {
       type: 'image/jpeg',
     });
 
-    const response = await fetch('https://fb1b-34-143-178-40.ngrok-free.app/predict', {
+    const response = await fetch(`${serverUrl}/predict`, {
       method: 'POST',
       body: formData,
       headers: {

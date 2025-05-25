@@ -4,15 +4,27 @@ import { Text, Button, Appbar } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 import GradientBackground from './GradientBackground';
 import { useNavigation } from '@react-navigation/native'; 
+import { ServerUrlContext } from './ServerUrlContext';
+import { useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
+
 
 const HomeScreen = () => {
   const navigation = useNavigation(); 
+  const { serverUrl } = useContext(ServerUrlContext);
 
   return (
     <GradientBackground>
       <Appbar.Header style={styles.appbar}>
         <Image source={require('./assets/plantdorctorlogo.jpg')} style={styles.icon} />
         <Appbar.Content title="PlantDoctor" titleStyle={styles.appbarTitle} />
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Settings')}
+          style={styles.hiddenButton}
+          accessible={true}
+          accessibilityLabel="Open Settings"
+        />
       </Appbar.Header>
 
       <Animatable.View animation="fadeInUp" duration={1500} style={styles.animView}>
@@ -25,7 +37,13 @@ const HomeScreen = () => {
         <View style={styles.buttonContainer}>
           <Button
             mode="contained"
-            onPress={() => navigation.navigate('Scan')} // ← navigate to the 'Scan' screen
+            onPress={() => {
+              if (serverUrl) {
+                navigation.navigate('Scan');
+              } else {
+                alert('Please set the server URL first in Settings');
+              }
+            }}
             style={styles.button}
             labelStyle={styles.buttonLabel}
           >
@@ -38,6 +56,14 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  hiddenButton: {
+    width: 40,
+    height: 40,
+    backgroundColor: 'black',
+    opacity: 0.01,  
+    marginRight: 10,
+    borderRadius: 4,
+  },
   appbar: {
     backgroundColor: '#000',
     width: '100%',
