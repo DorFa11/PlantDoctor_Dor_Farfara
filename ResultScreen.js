@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
   },
   animView: {
     flex: 1,
-    justifyContent: 'flex-start',  // Align content to the top
-    paddingTop: 120,               // Enough padding to clear the Appbar
-    paddingHorizontal: 20,         // Optional: horizontal spacing
+    justifyContent: 'flex-start',
+    paddingTop: 120,
+    paddingHorizontal: 20,
   },
 
   content: {

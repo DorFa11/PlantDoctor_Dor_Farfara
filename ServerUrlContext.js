@@ -1,4 +1,3 @@
-// ServerUrlContext.js
 import React, { createContext, useState } from 'react';
 
 export const ServerUrlContext = createContext();

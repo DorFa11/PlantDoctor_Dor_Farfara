@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 100, // space below appbar
+    paddingTop: 100,
     paddingHorizontal: 30,
     justifyContent: 'center',
   },

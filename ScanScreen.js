@@ -12,6 +12,7 @@ import { ServerUrlContext } from './ServerUrlContext';
 import { useContext } from 'react';
 
 
+
 const ScanScreen = () => {
   const navigation = useNavigation(); 
   
@@ -26,7 +27,7 @@ const ScanScreen = () => {
 
     if (isAnalyzing) {
       interval = setInterval(() => {
-        setDotCount((prev) => (prev + 1) % 4); // loops between 0, 1, 2, 3
+        setDotCount((prev) => (prev + 1) % 4);
       }, 300);
     } else {
       setDotCount(0);
@@ -85,7 +86,7 @@ const ScanScreen = () => {
 
 
   const analyzeImage = async () => {
-  if (isAnalyzing) return; // Prevent double submission
+  if (isAnalyzing) return;
 
   setIsAnalyzing(true);
   try {
@@ -98,7 +99,7 @@ const ScanScreen = () => {
       0,
       undefined,
       false,
-      { mode: 'cover' }  // Ensures it fills the size and crops overflow
+      { mode: 'cover' }
     )
 
 
@@ -119,12 +120,12 @@ const ScanScreen = () => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.warn('❌ Error response:', errorText);
+      console.warn('Error response:', errorText);
       return;
     }
 
     const result = await response.json();
-    console.log('✅ Server response:', result);
+    console.log('Server response:', result);
 
     navigation.navigate('Result', {
       imageUri: imageUri,
@@ -132,7 +133,7 @@ const ScanScreen = () => {
     });
 
   } catch (error) {
-    console.error('❌ Failed to analyze image:', error);
+    console.error('Failed to analyze image:', error);
   } finally {
     setIsAnalyzing(false);
   }
@@ -148,7 +149,6 @@ const ScanScreen = () => {
       <Animatable.View animation="fadeInUp" duration={1500} style={styles.animView}>
         <View style={styles.content}>
 
-          {/* Conditional rendering */}
           {!imageUri ? (
             <>
             <Text style={styles.subtitle}>Choose a method to scan your plant</Text>

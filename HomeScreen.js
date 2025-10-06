@@ -86,13 +86,13 @@ const styles = StyleSheet.create({
   animView: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: 100, // Space below Appbar
+    paddingTop: 100, 
   },
   content: {
     flex: 1,
     justifyContent: 'flex-start',
     paddingTop: 100,
-    paddingHorizontal: 30, // give left/right padding
+    paddingHorizontal: 30,
     alignItems: 'center',
   },
 
